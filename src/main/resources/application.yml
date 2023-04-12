@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  servlet:
+    #访问路径的前缀，默认/
+    context-path: /community
+spring:
+  thymeleaf:
+    cache: false
+  datasource:
+    #mysql驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #mysql操作的数据库及其他配置
+    url: jdbc:mysql://localhost:3306/community?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: cong.0312
+    #所选的连接池，springBoot内置了很多个，Hikar是性能最好的
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      #最大的客户端连接数
+      maximum-pool-size: 15
+      #最小的连接保持数
+      minimum-idle: 5
+      #连接最多维持的时间（当没有连接，在xx秒后关闭）
+      idle-timeout: 30000
+mybatis:
+  # mapper文件所在的资源路径
+  mapper-locations: classpath:mapper/*.xml
+  # Java实体类所在的包路径,在写xml的returnType时候更简洁。
+  type-aliases-package: com.leechr.community.entity
+  configuration:
+    #自动生成主键，按自增长
+    use-generated-keys: true
+    #让数据库xx_ss 能自动匹配到Java类的驼峰 xx_Ss
+    map-underscore-to-camel-case: true
+#设置日志级别。默认是二级INFO，将其设置为一级Debug
+logging:
+  level:
+    #INFO: 记录一般性的应用程序事件，如启动、关闭、连接数据库等等。
+    #DEBUG:最详细的日志级别，记录应用程序中的详细信息，包括每个函数调用、变量的值等等。
+    com.leechr.community: debug
